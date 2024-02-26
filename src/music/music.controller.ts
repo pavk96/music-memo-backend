@@ -9,4 +9,11 @@ export class MusicController {
   async searchMusic() {
     await this.musicService.searchMusic({});
   }
+
+  @Get('playlist')
+  async findAllPlayList() {
+    await this.musicService.findAllPlaylist(
+      'PLmXAZclIUR48ZtUQg7FjxMGAYHk1PncwO',
+    );
+  }
 }
