@@ -12,25 +12,9 @@ export class MusicService {
     );
     console.log(searchedMusic);
   }
-  async findAllPlaylist(playlistId: string) {
-    // try {
-    //   const response = await this.youtubeService.playlistItems.list({
-    //     part: ['snippet'],
-    //     playlistId: playlistId,
-    //     maxResults: 25, // 요청할 항목의 수
-    //   });
+  async findAllPlaylist(playlistId: string, accessToken: string) {
+    console.log(accessToken);
 
-    //   const items = response.data.items;
-    //   return items.map((item) => {
-    //     return {
-    //       title: item.snippet.title,
-    //       videoId: item.snippet.resourceId.videoId,
-    //     };
-    //   });
-    // } catch (error) {
-    //   console.error('Error fetching playlist items: ', error);
-    //   throw error;
-    // }
     try {
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/playlistItems`,
@@ -41,17 +25,15 @@ export class MusicService {
             maxResults: 63,
           },
           headers: {
-            Authorization: process.env.ACCESS_TOKEN,
+            Authorization: 'Bearer ' + accessToken,
             Accept: 'application/json',
           },
         },
       );
       const items = response.data.items;
       return items.map((item) => {
-        console.log(item.snippet);
+        return item.snippet;
       });
-
-      console.log(response.data);
     } catch (error) {
       console.error(`Error fetching playlists: ${error}`);
     }

@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
 import { MusicService } from './music.service';
 
 @Controller('music')
@@ -11,9 +11,16 @@ export class MusicController {
   }
 
   @Get('playlist')
-  async findAllPlayList() {
-    await this.musicService.findAllPlaylist(
-      'PLmXAZclIUR48ZtUQg7FjxMGAYHk1PncwO',
-    );
+  async findAllPlayList(@Req() req: any) {
+    try {
+      const accessToken = req.headers.authorization;
+      const playlist = await this.musicService.findAllPlaylist(
+        'PLmXAZclIUR48ZtUQg7FjxMGAYHk1PncwO',
+        accessToken,
+      );
+      return playlist;
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
