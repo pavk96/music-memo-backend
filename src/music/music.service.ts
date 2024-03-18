@@ -12,17 +12,14 @@ export class MusicService {
     );
     console.log(searchedMusic);
   }
-  async findAllPlaylist(playlistId: string, accessToken: string) {
-    console.log(accessToken);
-
+  async findAllPlaylist(accessToken: string) {
     try {
       const response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/playlistItems`,
+        `https://www.googleapis.com/youtube/v3/playlists`,
         {
           params: {
             part: 'snippet',
-            playlistId,
-            maxResults: 63,
+            mine: true,
           },
           headers: {
             Authorization: 'Bearer ' + accessToken,
@@ -30,10 +27,31 @@ export class MusicService {
           },
         },
       );
-      const items = response.data.items;
-      return items.map((item) => {
-        return item.snippet;
-      });
+
+      const itemsOfChannelsPromise = response.data.items.map(
+        async (playList) => {
+          const itemsResponse = await axios.get(
+            `https://www.googleapis.com/youtube/v3/playlistItems`,
+            {
+              params: {
+                part: 'snippet',
+                playlistId: playList.id,
+                maxResults: 63,
+              },
+              headers: {
+                Authorization: 'Bearer ' + accessToken,
+                Accept: 'application/json',
+              },
+            },
+          );
+
+          const items = itemsResponse.data.items;
+          return items.map((item) => {
+            return item.snippet;
+          });
+        },
+      );
+      return await Promise.all(itemsOfChannelsPromise);
     } catch (error) {
       console.error(`Error fetching playlists: ${error}`);
     }

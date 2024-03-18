@@ -14,10 +14,8 @@ export class MusicController {
   async findAllPlayList(@Req() req: any) {
     try {
       const accessToken = req.headers.authorization;
-      const playlist = await this.musicService.findAllPlaylist(
-        'PLmXAZclIUR48ZtUQg7FjxMGAYHk1PncwO',
-        accessToken,
-      );
+      const playlist = await this.musicService.findAllPlaylist(accessToken);
+
       return playlist;
     } catch (error) {
       console.error(error);
