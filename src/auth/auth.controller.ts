@@ -1,19 +1,17 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
   @Get('google')
   @UseGuards(AuthGuard('google'))
-  async googleAuth(@Req() req) {}
+  async auth() {}
 
   @Get('google/callback')
   @UseGuards(AuthGuard('google'))
-  async googleAuthRedirect(@Req() req) {
-    // 여기서 사용자 정보를 사용합니다. 예: req.user
-    return {
-      message: '사용자 인증 성공',
-      user: req.user,
-    };
+  async googleAuthCallback(@Req() req: any, @Res() res: Response) {
+    res.cookie('accessToken', req.user.accessToken);
+    res.redirect('http://localhost:3000');
   }
 }
