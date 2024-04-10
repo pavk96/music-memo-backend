@@ -11,8 +11,16 @@ model music {
   id Int @id @default(autoincrement())
 }
 
-model note {
-  id Int @id @default(autoincrement())
+model memo {
+  id      Int    @id @default(autoincrement())
+  musicId String @map("music_id") @db.VarChar(255) // 구글로부터 받아오는 아이디
+  memo    String @db.LongText
+}
+
+model document {
+  id      Int    @id @default(autoincrement())
+  title   String @db.VarChar(255)
+  content String @db.LongText
 }
 
 model user {
