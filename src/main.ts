@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as session from 'express-session';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: { origin: '*' } });
@@ -13,6 +14,14 @@ async function bootstrap() {
         secure: process.env.NODE_ENV === 'production',
         maxAge: 1000 * 60 * 60 * 24, // 24 hours
       },
+    }),
+  );
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      disableErrorMessages: false,
     }),
   );
   await app.listen(8080);
