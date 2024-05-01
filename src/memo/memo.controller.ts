@@ -7,8 +7,12 @@ export class MemoController {
   constructor(private readonly memoService: MemoService) {}
   @Post('/')
   async createMemo(@Body() body: CreateMemoDTO) {
-    await this.memoService.createMemo(body);
+    try {
+      await this.memoService.createMemo(body);
+    } catch (error) {
+      console.log(error);
 
-    return;
+      throw new Error(error);
+    }
   }
 }
