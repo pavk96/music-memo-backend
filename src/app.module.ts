@@ -5,6 +5,7 @@ import { MusicModule } from './music/music.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { MemoModule } from './memo/memo.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { MemoModule } from './memo/memo.module';
       envFilePath: `.env`,
     }),
     MemoModule,
+    PrismaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
