@@ -11,8 +11,10 @@ model music {
   id Int @id @default(autoincrement())
 }
 
-model note {
-  id Int @id @default(autoincrement())
+model memo {
+  id      Int    @id @default(autoincrement())
+  videoId String @db.VarChar(255)
+  memo    String @db.LongText
 }
 
 model user {

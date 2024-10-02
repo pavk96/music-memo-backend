@@ -813,10 +813,10 @@
   resolved "https://registry.yarnpkg.com/@pkgr/core/-/core-0.1.1.tgz#1ec17e2edbec25c8306d424ecfbf13c7de1aaa31"
   integrity sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==
 
-"@prisma/client@5.10.2":
-  version "5.10.2"
-  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-5.10.2.tgz#e087b40a4de8e3171eb9cbf0a873465cd2068e17"
-  integrity sha512-ef49hzB2yJZCvM5gFHMxSFL9KYrIP9udpT5rYo0CsHD4P9IKj473MbhU1gjKKftiwWBTIyrt9jukprzZXazyag==
+"@prisma/client@^5.20.0":
+  version "5.20.0"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-5.20.0.tgz#4fc9f2b2341c9c997c139df4445688dd6b39663b"
+  integrity sha512-CLv55ZuMuUawMsxoqxGtLT3bEZoa2W8L3Qnp6rDIFWy+ZBrUcOFKdoeGPSnbBqxc3SkdxJrF+D1veN/WNynZYA==
 
 "@prisma/debug@5.10.2":
   version "5.10.2"
